@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { Menu, X, ChevronDown } from 'lucide-react';
 import { Link } from '../components/Link';
+import GatlinburgLogo from '../assets/gatlinburg-logo.png'; 
 
 const Navbar: React.FC = () => {
   const [isOpen, setIsOpen] = useState(false);
@@ -29,18 +30,25 @@ const Navbar: React.FC = () => {
         <div className="flex justify-between items-center">
           <Link 
             to="hero" 
-            className="text-2xl font-bold text-white transition-colors duration-300"
-            style={{ color: isScrolled ? '#1F4E3D' : 'white' }}
+            className={`flex items-center space-x-4 text-2xl font-bold transition-colors duration-300 ${isScrolled ? 'text-[#1F4E3D]' : 'text-white'}`}
           >
-            Visit Gatlinburg
+            <img 
+              src={GatlinburgLogo} 
+              alt="Gatlinburg logo" 
+              className="w-16 h-16 object-contain"
+            />
+            <span>Gatlinburg</span>
           </Link>
-          
+
           <div className="hidden md:flex space-x-8 items-center">
             <NavLinks isScrolled={isScrolled} />
             <button 
               className="px-4 py-2 bg-amber-600 hover:bg-amber-700 text-white rounded transition-colors duration-300"
             >
+              <Link to="things-to-do" className={`font-medium transition-colors duration-300`}>
               Plan Your Visit
+              </Link>
+              
             </button>
           </div>
           
@@ -81,7 +89,7 @@ const NavLinks: React.FC<{ isScrolled: boolean }> = ({ isScrolled }) => {
 
   return (
     <>
-      <Link to="things-to-do\" className={`font-medium ${linkStyle} transition-colors duration-300`}>
+      <Link to="things-to-do" className={`font-medium ${linkStyle} transition-colors duration-300`}>
         Things to Do
       </Link>
       <Link to="places-to-stay" className={`font-medium ${linkStyle} transition-colors duration-300`}>

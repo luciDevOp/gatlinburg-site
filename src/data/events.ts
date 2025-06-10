@@ -4,7 +4,7 @@ export const events = [
     name: "Winter Magic Festival",
     date: "November 15 - February 28",
     month: "november",
-    image: "https://images.pexels.com/photos/843435/pexels-photo-843435.jpeg",
+    image: "https://tse2.mm.bing.net/th?id=OIP.Dp68XxKocH8oR9s6Tzee4AHaJI&pid=Api",
     location: "Downtown Gatlinburg",
     description: "Millions of holiday lights transform Gatlinburg into a winter wonderland with special displays, events, and decorations throughout the city."
   },
@@ -13,7 +13,7 @@ export const events = [
     name: "Great Smoky Mountains Wildflower Pilgrimage",
     date: "April 26 - 30",
     month: "april",
-    image: "https://images.pexels.com/photos/1037995/pexels-photo-1037995.jpeg",
+    image: "https://tse0.mm.bing.net/th?id=OIP.Oper4C4e1_rajiTcRKETKQHaF6&pid=Api",
     location: "Great Smoky Mountains National Park",
     description: "Annual event featuring guided wildflower walks, photography classes, and educational programs led by botanists and naturalists."
   },
@@ -22,7 +22,7 @@ export const events = [
     name: "Gatlinburg Craftsmen's Fair",
     date: "July 12 - 21",
     month: "july",
-    image: "https://images.pexels.com/photos/2608368/pexels-photo-2608368.jpeg",
+    image: "https://tse0.mm.bing.net/th?id=OIP.fe63_bcIRwRU0cZPO1Je1gHaJ4&pid=Api",
     location: "Gatlinburg Convention Center",
     description: "Over 200 booths featuring unique handcrafted items from artists across the nation, along with live country and bluegrass music."
   },
@@ -31,7 +31,7 @@ export const events = [
     name: "Smoky Mountain Tunes & Tales",
     date: "June 15 - August 15",
     month: "june",
-    image: "https://images.pexels.com/photos/7561385/pexels-photo-7561385.jpeg",
+    image: "https://tse0.mm.bing.net/th?id=OIP.9_RgxOb-XpaPkWUypCwzmAHaE8&pid=Api",
     location: "Downtown Parkway",
     description: "Street performances by costumed musicians, storytellers, and artisans portraying characters from the 1800s Appalachian culture."
   },
@@ -40,7 +40,7 @@ export const events = [
     name: "Gatlinburg's 4th of July Midnight Parade",
     date: "July 3 - 4",
     month: "july",
-    image: "https://images.pexels.com/photos/2118484/pexels-photo-2118484.jpeg",
+    image: "https://tse4.mm.bing.net/th?id=OIP.tboEGBrsPAvUyNBW6BEZKAHaE8&pid=Api",
     location: "Downtown Gatlinburg",
     description: "The nation's first Independence Day parade, starting at midnight with floats, balloons, bands, and patriotic displays."
   },
@@ -49,7 +49,7 @@ export const events = [
     name: "Oktoberfest at Ober Gatlinburg",
     date: "September 28 - October 31",
     month: "october",
-    image: "https://images.pexels.com/photos/5530014/pexels-photo-5530014.jpeg",
+    image: "https://tse2.mm.bing.net/th?id=OIP.-9BlkIdrS8wUZGznId7ATAHaLH&pid=Api",
     location: "Ober Gatlinburg",
     description: "Traditional Bavarian festival featuring German food, beer, music, and dancing, with special activities for the whole family."
   },
@@ -67,7 +67,7 @@ export const events = [
     name: "Spring Wildflower Celebration",
     date: "March 15 - April 15",
     month: "march",
-    image: "https://images.pexels.com/photos/53136/pexels-photo-53136.jpeg",
+    image: "https://tse0.mm.bing.net/th?id=OIP.6JUaajVq8GRjSSmYp4OGBQHaFj&pid=Api",
     location: "Great Smoky Mountains National Park",
     description: "Special ranger-led programs, guided hikes, and activities celebrating the incredible diversity of wildflowers in the Smokies."
   },

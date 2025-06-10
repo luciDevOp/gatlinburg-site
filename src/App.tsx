@@ -8,6 +8,8 @@ import Events from './components/Events';
 import About from './components/About';
 import Contact from './components/Contact';
 import Footer from './components/Footer';
+import Chatbot from './chatbot/Chatbot';
+
 
 function App() {
   return (
@@ -21,6 +23,7 @@ function App() {
       <About />
       <Contact />
       <Footer />
+      <Chatbot />
     </div>
   );
 }

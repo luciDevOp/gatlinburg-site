@@ -20,3 +20,7 @@ h1, h2, h3, h4, h5, h6 {
   -webkit-box-orient: vertical;
   overflow: hidden;
 }
+.bpw-widget-container {
+  display: block !important;
+  z-index: 9999 !important;
+}

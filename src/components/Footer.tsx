@@ -1,7 +1,7 @@
 import React from 'react';
 import { Link } from './Link';
 import { Facebook, Twitter, Instagram, Youtube } from 'lucide-react';
-
+import NewsletterForm from './NewsletterForm';
 const Footer: React.FC = () => {
   return (
     <footer className="bg-green-900 text-white">
@@ -13,6 +13,7 @@ const Footer: React.FC = () => {
               The gateway to the Great Smoky Mountains National Park, offering memorable experiences for all visitors.
             </p>
             <div className="flex space-x-4">
+              {/* AICI PUI CE VREI TU LA HREF - LINK CATRE CE VREI TU */}
               <SocialLink icon={<Facebook size={20} />} href="#" />
               <SocialLink icon={<Twitter size={20} />} href="#" />
               <SocialLink icon={<Instagram size={20} />} href="#" />
@@ -49,19 +50,7 @@ const Footer: React.FC = () => {
             <p className="mb-4 text-gray-300">
               Subscribe to our newsletter for the latest updates, events, and special offers.
             </p>
-            <form className="space-y-3">
-              <input 
-                type="email" 
-                placeholder="Your email address" 
-                className="w-full px-4 py-2 bg-green-800 border border-green-700 rounded-md text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-amber-400"
-              />
-              <button 
-                type="submit"
-                className="w-full px-4 py-2 bg-amber-600 hover:bg-amber-700 rounded-md font-medium transition-colors duration-300"
-              >
-                Subscribe
-              </button>
-            </form>
+            <NewsletterForm compact />
           </div>
         </div>
         

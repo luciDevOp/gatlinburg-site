@@ -45,12 +45,7 @@ const ThingsToDo: React.FC = () => {
             <AttractionCard key={item.id} attraction={item} />
           ))}
         </div>
-        
-        <div className="text-center mt-12">
-          <button className="px-6 py-3 bg-amber-600 hover:bg-amber-700 text-white rounded-md font-medium transition-colors duration-300">
-            View All Attractions
-          </button>
-        </div>
+
       </div>
     </section>
   );
@@ -88,7 +83,10 @@ type AttractionCardProps = {
   };
 };
 
+
 const AttractionCard: React.FC<AttractionCardProps> = ({ attraction }) => {
+  const [isExpanded, setIsExpanded] = useState(false);
+
   return (
     <div className="bg-white rounded-lg overflow-hidden shadow-md hover:shadow-lg transition-shadow duration-300">
       <div 
@@ -102,18 +100,27 @@ const AttractionCard: React.FC<AttractionCardProps> = ({ attraction }) => {
             {attraction.rating.toFixed(1)} ★
           </div>
         </div>
-        <p className="text-gray-600 mb-4">{attraction.description}</p>
+        <p className="text-gray-600 mb-4">
+          {isExpanded 
+            ? attraction.description 
+            : attraction.description.slice(0, 80) + (attraction.description.length > 80 ? '...' : '')
+          }
+        </p>
         <div className="flex justify-between items-center">
           <span className="inline-block bg-green-100 text-green-800 px-2 py-1 rounded-full text-xs font-medium">
             {attraction.category.charAt(0).toUpperCase() + attraction.category.slice(1)}
           </span>
-          <button className="text-amber-600 hover:text-amber-800 font-medium transition-colors duration-300">
-            Learn More →
+          <button 
+            onClick={() => setIsExpanded(!isExpanded)}
+            className="text-amber-600 hover:text-amber-800 font-medium transition-colors duration-300"
+          >
+            {isExpanded ? 'Show Less ↑' : 'Learn More →'}
           </button>
         </div>
       </div>
     </div>
   );
 };
+
 
 export default ThingsToDo;

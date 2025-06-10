@@ -40,22 +40,15 @@ const Hero: React.FC = () => {
         <p className="text-xl md:text-2xl text-white opacity-90 mb-8 max-w-3xl mx-auto">
           Nestled in the heart of the Great Smoky Mountains, Gatlinburg offers breathtaking views, thrilling attractions, and unforgettable experiences.
         </p>
-        <div className="flex flex-col sm:flex-row justify-center gap-4">
-          <button className="px-8 py-3 bg-amber-600 hover:bg-amber-700 text-white rounded-md font-medium transition-colors duration-300 text-lg">
-            Explore Attractions
-          </button>
-          <button className="px-8 py-3 bg-transparent hover:bg-white/10 text-white border-2 border-white rounded-md font-medium transition-colors duration-300 text-lg">
-            Plan Your Visit
-          </button>
-        </div>
       </div>
       
-      <div className="absolute bottom-10 left-1/2 transform -translate-x-1/2 text-white animate-bounce">
+      <div className="absolute bottom-10 w-full flex justify-center z-20 text-white animate-bounce">
         <Link to="things-to-do" className="flex flex-col items-center">
           <span className="text-sm mb-2">Discover More</span>
           <ChevronDown size={24} />
         </Link>
       </div>
+
     </section>
   );
 };

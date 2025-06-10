@@ -10,22 +10,37 @@ const Contact: React.FC = () => {
     message: ''
   });
 
-  const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) => {
+  const [status, setStatus] = useState<'idle' | 'sending' | 'success' | 'error'>('idle');
+
+  const handleChange = (
+    e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>
+  ) => {
     const { name, value } = e.target;
     setFormData(prev => ({ ...prev, [name]: value }));
   };
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    // Handle form submission (would connect to backend in real implementation)
-    console.log('Form submitted:', formData);
-    alert('Thank you for your message! We will get back to you soon.');
-    setFormData({
-      name: '',
-      email: '',
-      subject: '',
-      message: ''
-    });
+    setStatus('sending');
+
+    try {
+      const response = await fetch('https://formspree.io/f/mkgbjaev', {
+        method: 'POST',
+        headers: {
+          'Accept': 'application/json'
+        },
+        body: new FormData(e.target as HTMLFormElement)
+      });
+
+      if (response.ok) {
+        setStatus('success');
+        setFormData({ name: '', email: '', subject: '', message: '' });
+      } else {
+        setStatus('error');
+      }
+    } catch (error) {
+      setStatus('error');
+    }
   };
 
   return (
@@ -39,6 +54,14 @@ const Contact: React.FC = () => {
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 mt-12">
           <div>
             <h3 className="text-2xl font-bold text-gray-800 mb-6">Get in Touch</h3>
+
+            {/* Feedback Message */}
+            {status === 'success' && (
+              <p className="text-green-700 mb-4 font-medium">Thank you! Your message has been sent.</p>
+            )}
+            {status === 'error' && (
+              <p className="text-red-600 mb-4 font-medium">Oops! Something went wrong. Please try again.</p>
+            )}
             
             <form onSubmit={handleSubmit} className="space-y-6">
               <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
@@ -80,11 +103,11 @@ const Contact: React.FC = () => {
                   className="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-green-800 focus:border-transparent"
                 >
                   <option value="">Select a subject</option>
-                  <option value="general">General Inquiry</option>
-                  <option value="attractions">Attractions Information</option>
-                  <option value="accommodations">Accommodations</option>
-                  <option value="dining">Dining</option>
-                  <option value="events">Events & Festivals</option>
+                  <option value="General Inquiry">General Inquiry</option>
+                  <option value="Attractions Information">Attractions Information</option>
+                  <option value="Accommodations">Accommodations</option>
+                  <option value="Dining">Dining</option>
+                  <option value="Events & Festivals">Events & Festivals</option>
                 </select>
               </div>
               
@@ -103,9 +126,10 @@ const Contact: React.FC = () => {
               
               <button
                 type="submit"
-                className="px-6 py-3 bg-green-800 hover:bg-green-900 text-white rounded-md font-medium transition-colors duration-300"
+                disabled={status === 'sending'}
+                className="px-6 py-3 bg-green-800 hover:bg-green-900 text-white rounded-md font-medium transition-colors duration-300 disabled:opacity-60"
               >
-                Send Message
+                {status === 'sending' ? 'Sending...' : 'Send Message'}
               </button>
             </form>
           </div>
@@ -141,15 +165,17 @@ const Contact: React.FC = () => {
               </div>
             </div>
             
-            <div className="rounded-lg overflow-hidden shadow-md h-72 relative">
-              {/* In a real implementation, this would be a Google Maps iframe */}
-              <div className="absolute inset-0 bg-gray-200 flex items-center justify-center">
-                <div className="text-center p-4">
-                  <MapPin size={32} className="mx-auto text-green-800 mb-2" />
-                  <h4 className="text-lg font-bold text-gray-800">Gatlinburg Welcome Center</h4>
-                  <p className="text-gray-600">520 Parkway, Gatlinburg, TN 37738</p>
-                </div>
-              </div>
+            <div className="rounded-lg overflow-hidden shadow-md h-72">
+              <iframe
+                title="Gatlinburg Welcome Center Map"
+                src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3207.8233580819257!2d-83.51249748442686!3d35.726621980181444!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x88595b15e6c9b85d%3A0x28b1fbd8d4ce1ee0!2sGatlinburg%20Welcome%20Center!5e0!3m2!1sen!2sus!4v1689476801111!5m2!1sen!2sus"
+                width="100%"
+                height="100%"
+                allowFullScreen
+                loading="lazy"
+                referrerPolicy="no-referrer-when-downgrade"
+                className="border-0 w-full h-full"
+              ></iframe>
             </div>
           </div>
         </div>

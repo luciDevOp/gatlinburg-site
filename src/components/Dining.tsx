@@ -1,8 +1,18 @@
-import React from 'react';
+import React, { useState } from 'react';
 import SectionTitle from './SectionTitle';
 import { restaurants } from '../data/restaurants';
 
 const Dining: React.FC = () => {
+  const [selectedRestaurant, setSelectedRestaurant] = useState<RestaurantCardProps['restaurant'] | null>(null);
+
+  const handleViewMenu = (restaurant: RestaurantCardProps['restaurant']) => {
+    setSelectedRestaurant(restaurant);
+  };
+
+  const closeModal = () => {
+    setSelectedRestaurant(null);
+  };
+
   return (
     <section id="dining" className="py-20 bg-stone-50">
       <div className="container mx-auto px-4">
@@ -36,9 +46,6 @@ const Dining: React.FC = () => {
                   <span>Hand-crafted desserts and Appalachian sweets</span>
                 </li>
               </ul>
-              <button className="px-5 py-2 bg-green-800 hover:bg-green-900 text-white rounded transition-colors duration-300">
-                Explore Local Specialties
-              </button>
             </div>
           </div>
           
@@ -52,15 +59,12 @@ const Dining: React.FC = () => {
         
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
           {restaurants.map((restaurant) => (
-            <RestaurantCard key={restaurant.id} restaurant={restaurant} />
+            <RestaurantCard key={restaurant.id} restaurant={restaurant} onViewMenu={handleViewMenu} />
           ))}
         </div>
-        
-        <div className="mt-12 text-center">
-          <button className="px-6 py-3 bg-amber-600 hover:bg-amber-700 text-white rounded-md font-medium transition-colors duration-300">
-            View All Dining Options
-          </button>
-        </div>
+
+        <RestaurantModal restaurant={selectedRestaurant} onClose={closeModal} />
+
       </div>
     </section>
   );
@@ -75,10 +79,12 @@ type RestaurantCardProps = {
     priceRange: string;
     rating: number;
     description: string;
+    menu: string[]; 
   };
+  onViewMenu: (restaurant: RestaurantCardProps['restaurant']) => void;
 };
 
-const RestaurantCard: React.FC<RestaurantCardProps> = ({ restaurant }) => {
+const RestaurantCard: React.FC<RestaurantCardProps> = ({ restaurant, onViewMenu }) => {
   return (
     <div className="bg-white rounded-lg overflow-hidden shadow-md hover:shadow-lg transition-all duration-300 transform hover:-translate-y-1">
       <div 
@@ -98,9 +104,45 @@ const RestaurantCard: React.FC<RestaurantCardProps> = ({ restaurant }) => {
           <span className="text-gray-600 text-sm">{restaurant.priceRange}</span>
         </div>
         <p className="text-gray-600 mb-4 line-clamp-3">{restaurant.description}</p>
-        <button className="w-full px-4 py-2 bg-green-50 hover:bg-green-100 text-green-800 rounded transition-colors duration-300 font-medium">
+        <button
+          onClick={() => onViewMenu(restaurant)}
+          className="w-full px-4 py-2 bg-green-50 hover:bg-green-100 text-green-800 rounded transition-colors duration-300 font-medium"
+        >
           View Menu
         </button>
+      </div>
+    </div>
+  );
+};
+
+type RestaurantModalProps = {
+  restaurant: RestaurantCardProps['restaurant'] | null;
+  onClose: () => void;
+};
+
+const RestaurantModal: React.FC<RestaurantModalProps> = ({ restaurant, onClose }) => {
+  if (!restaurant) return null;
+
+  return (
+    <div className="fixed inset-0 bg-black bg-opacity-50 z-50 flex items-center justify-center">
+      <div className="bg-white rounded-lg shadow-lg max-w-md w-full p-6 relative">
+        <button
+          onClick={onClose}
+          className="absolute top-2 right-2 text-gray-500 hover:text-gray-700 text-xl"
+        >
+          ×
+        </button>
+        <h2 className="text-2xl font-bold mb-2">{restaurant.name}</h2>
+        <p className="text-sm text-gray-600 mb-1"><strong>Cuisine:</strong> {restaurant.cuisine}</p>
+        <p className="text-sm text-gray-600 mb-1"><strong>Price:</strong> {restaurant.priceRange}</p>
+        <p className="text-sm text-gray-600 mb-4"><strong>Rating:</strong> {restaurant.rating.toFixed(1)} ★</p>
+        <p className="text-gray-700 mb-4">{restaurant.description}</p>
+        <h3 className="text-lg font-semibold text-gray-800 mb-2">Sample Menu</h3>
+        <ul className="list-disc list-inside text-gray-600 space-y-1">
+          {restaurant.menu.map((item, index) => (
+            <li key={index}>{item}</li>
+          ))}
+        </ul>
       </div>
     </div>
   );
